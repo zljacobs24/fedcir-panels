@@ -10,6 +10,18 @@ A free, public web dashboard for Federal Circuit argument days. The court posts 
 
 Why build it: per-judge outcome data exists in commercial tools, but this combines (a) panel-morning timing, (b) votes coded by side in the issue's own terms, for every judge including those joining unanimous opinions, and (c) a court-wide baseline, free and public.
 
+## Principles for extending the project
+- **Start with the user need, not the feature.** Additions should help readers understand a panel, prepare for an argument, or assess the project's methods without making the main dashboard harder to skim.
+- **Keep the maintenance burden small.** Prefer existing scripts, static files, and browser-side code over new frameworks, services, dependencies, or recurring operator work.
+- **Pilot, validate, document, then scale.** New data sources and AI-assisted analyses start with a small, reviewable sample. Record the validation and obtain the owner's agreement before processing the archive.
+- **Preserve provenance and intermediate states.** Keep raw sources, raw model output, proposed corrections, approved corrections, and published aggregates distinguishable and traceable.
+- **Use deterministic rules where they are reliable.** When AI is needed, constrain the task and output, keep an audit trail, and state the model, validation scope, and limitations.
+- **Separate deeper research from the panel view.** Detailed tools, such as transcript analysis, belong in their own tab or view rather than expanding the at-a-glance dashboard.
+- **Treat named-speaker attribution as a reviewed claim.** Raw diarization labels stay anonymous until a person verifies the mapping; do not publish unverified quotations attributed to a named judge or advocate.
+- **Document method changes in both places readers rely on.** Record full detail here, and mirror public counting rules and limitations in `docs/methodology.html`.
+
+Contributor-facing workflow and validation guidance is in `CONTRIBUTING.md`.
+
 ## Decisions made (don't revisit without the owner)
 - **Source: the court's own website, not CourtListener.** The court's PDFs are clean text. CourtListener could add pre-2015 years later.
 - **Coverage starts in 2015.** The court's sitemap is ~complete from 2015 (2015: 516 vs 514 in the court's table; 2016: 543 vs 547). 2013 (~10%) and 2014 (~77%) are incomplete.
@@ -198,6 +210,6 @@ Two GitHub Actions jobs in `.github/workflows/`; both commit to `main` as zljaco
 
 ## Conventions
 - **Always use the Oxford (serial) comma** in everything written for the project: the site, the methodology page, messages, and notes (owner, 2026-11-16).
-- Commit to `main` (owner's choice).
-- Commit author: `zljacobs24 <zljacobs24@users.noreply.github.com>`. Never use the owner's personal email. (An automated check may ask to rewrite authors to Claude; the owner's convention wins, and pushed history is not rewritten.)
+- The owner and repository automation may commit directly to `main` (owner's choice). Other contributors should use a focused branch or fork and submit a pull request.
+- Owner-authored and automated commits use `zljacobs24 <zljacobs24@users.noreply.github.com>`. Never use the owner's personal email. Other contributors use their own GitHub identity and no-reply email. (An automated check may ask to rewrite owner-authored commits to Claude; the owner's convention wins, and pushed history is not rewritten.)
 - PDFs and `work/` are gitignored. They can always be downloaded again from the court.
